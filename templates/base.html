@@ -18,11 +18,14 @@
 <!-- 导航开始 -->
 <div class="nav">
 <a href="/">Home</a> |
+<a href="/accounts/login/">登录</a> |
 <a href="/help/help/">Help</a>
 </div>
 <!-- 导航结束 -->
 <hr>
-
+<h2>
+{% block head %}{% endblock %}
+</h2>
 <!-- 主体开始 -->
 <div class="content">
 {% block content %}{% endblock %}

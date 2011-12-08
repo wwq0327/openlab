@@ -5,6 +5,7 @@ from django.conf.urls.defaults import patterns, include, url
 # admin.autodiscover()
 
 urlpatterns = patterns('',
+                       # all home of the site
                        (r'^$', 'openlab.accounts.views.all_home'),
                        # accounts mananger
                        (r'^accounts/', include('openlab.accounts.urls')),
