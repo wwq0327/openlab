@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% block title %}Home{% endblock %}
+{% block head %} 欢迎来到OpenLab 开放学习平台！ {% endblock %}
 
 {% block content %}
+
+<p> 欢迎你 {{ user.username }}!</p>
+
 <h2> 这里是登录后看到的个人首页 </h2>
 {% endblock %}

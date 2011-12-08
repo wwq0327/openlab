@@ -46,6 +46,12 @@ USE_I18N = True
 # calendars according to the current locale
 USE_L10N = True
 
+#login URL
+LOGIN_URL = '/accounts/login/'
+
+#logout URL
+LOGIN_URL = '/accounts/logout/'
+
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
 MEDIA_ROOT = os.path.join(HERE, 'media')

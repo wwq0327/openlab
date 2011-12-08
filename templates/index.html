@@ -1,9 +1,15 @@
 {% extends "base.html" %}
 
 {% block title %} 首页 {% endblock %}
+{% block head %} 欢迎来到 OpenLab 开放学习平台 !{% endblock %}
 
 {% block content %}
+{% if user.username %}
+欢迎你 {{ user.username }}!
+{% else %}
 
-<h2>这里是全站的首页，当用户没有登录时就只能看到这里</h2>
+你现在还没有登录，请点击<a href="/accounts/login/">登录</a>。
+
+{% endif %}
 
 {% endblock %}

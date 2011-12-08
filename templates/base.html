@@ -18,7 +18,15 @@
 <!-- 导航开始 -->
 <div class="nav">
 <a href="/">Home</a> |
+
+{% if user.is_authenticated %}
+<a href='/{{ user.username}}/home'>个人主页</a> |
+<a href="/accounts/logout/">退出</a> |
+{% else %}
 <a href="/accounts/login/">登录</a> |
+<a href="/accounts/reg">注册</a> |
+{% endif %}
+
 <a href="/help/help/">Help</a>
 </div>
 <!-- 导航结束 -->

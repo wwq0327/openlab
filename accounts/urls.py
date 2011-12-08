@@ -7,7 +7,7 @@
 from django.conf.urls.defaults import patterns, include, url
 
 urlpatterns = patterns('openlab.accounts.views',
-                       url(r'^$', 'home', name='ac_home'),
+                       url(r'^logout/$', 'logout_view'),
                        )
 
 urlpatterns += patterns('',
