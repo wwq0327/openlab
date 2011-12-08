@@ -6,4 +6,4 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 
 def home(request):
-    return HttpResponse('this is home')
+    return render_to_response('/accounts/home.html')
