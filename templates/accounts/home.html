@@ -6,5 +6,17 @@
 
 <p> 欢迎你 {{ user.username }}!</p>
 
+{% include "common/_status.html" %}
+
+{% if st_list %}
+  <ul class="status-list">
+    {% for st in st_list %}
+      <li>{{ st.content }} @ {{ st.updated|date:"F j, Y"}} </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>您什么情感状态也没有留下~~</p>
+{% endif %}
+
 <h2> 这里是登录后看到的个人首页 </h2>
 {% endblock %}
