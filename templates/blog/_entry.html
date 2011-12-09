@@ -1,2 +1,11 @@
-  <li><a href="/blog/entry/{{ page.id }}/">{{ page.title }}</a> @ {{ page.updated|date:"F j, Y" }}</li>
-  <li>{{ page.content }}</li>
+
+<li id="blog_title"><a href="/{{ user.username }}/blog/entry/{{ page.id }}/">{{ page.title }}</a></li>
+<li id="blog_updated">发布时间： {{ page.updated|date:"F j, Y" }}</li>
+<li id="blog_entry">{{ page.content|safe }}</li>
+{% if tag_show %}
+<li>Tags:
+     {% for tag in page.tags.all %}
+     <a href="/{{ user.username }}/blog/tags/{{tag}}/">{{ tag }}</a>
+     {% endfor %}
+</li>
+{% endif %}

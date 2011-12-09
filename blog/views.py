@@ -23,7 +23,7 @@ def entry_list(request):
 
     lists = user.entry_set.all()
 
-    var = RequestContext(request, {'lists': lists})
+    var = RequestContext(request, {'lists': lists, 'tag_show': False})
 
     return render_to_response('blog/home.html', var)
 
@@ -31,8 +31,9 @@ def entry_list(request):
 @login_required
 def entry_page(request, id):
     page = Entry.objects.get(id=id)
+    #tags = page.tags.all()
 
-    var = RequestContext(request, {'page': page})
+    var = RequestContext(request, {'page': page, 'tag_show': True})
 
     return render_to_response('blog/entry.html', var)
 
@@ -63,3 +64,14 @@ def entry_new(request):
 
     return render_to_response('blog/entry_new.html', var)
 
+@login_required
+def entry_tag(request, tag):
+    """根据tag查找相应的entry"""
+
+    t = Tag.objects.get(tag=tag)
+
+    lists = t.entry_set.all()
+
+    var = RequestContext(request, {'lists': lists, 'bytag_show': True, 'tag': tag})
+
+    return render_to_response('blog/home.html', var)

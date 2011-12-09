@@ -5,11 +5,17 @@
 {% block content %}
 
 {% include "blog/_header.html" %}
+{% if bytag_show %}
+
+<p> 你所查找的含有 "<b><em>{{ tag }}</em></b>" 标签的文章共计 <b><em>{{ lists.count }} </em></b> 篇：</p>
+
+{% endif %}
 
   {% if lists %}
 <ul>
   {% for page in lists %}
 {% include "blog/_entry.html" %}
+  <br>
   {% endfor %}
 </ul>
   {% else %}

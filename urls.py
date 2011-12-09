@@ -11,7 +11,7 @@ urlpatterns = patterns('',
                        # accounts mananger
                        url(r'^accounts/', include('openlab.accounts.urls')),
                        # blog
-                       url(r'^blog/', include('openlab.blog.urls')),
+                       url(r'^(\w+)/blog/', include('openlab.blog.urls')),
     # Examples:
     # url(r'^$', 'openlab.views.home', name='home'),
     # url(r'^openlab/', include('openlab.foo.urls')),

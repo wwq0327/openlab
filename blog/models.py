@@ -7,7 +7,7 @@ class Tag(models.Model):
     user = models.ForeignKey(User)
 
     def __str__(self):
-        return '<Tag "%s">' % self.tag
+        return '%s' % self.tag
 
 class Entry(models.Model):
     title = models.CharField(max_length=100)
