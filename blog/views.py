@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 
 from django.contrib.auth.models import User
-from openlab.blog.models import Entry
+from openlab.blog.models import Entry, Tag
 
 ## forms
 from openlab.blog.forms import EntryForm
@@ -43,10 +43,16 @@ def entry_new(request):
     if request.method == 'POST':
         form = EntryForm(request.POST)
         if form.is_valid():
+
             entry = Entry.objects.create(
                 title = form.cleaned_data['title'],
                 content = form.cleaned_data['content'],
                 user = user)
+            tag_names = form.cleaned_data['tags'].split()
+            for tag_name in tag_names:
+                tag, dummy = Tag.objects.get_or_create(tag=tag_name, user=user)
+                entry.tags.add(tag)
+
             entry.save()
             return HttpResponseRedirect(reverse('entry_lst'))
     else:

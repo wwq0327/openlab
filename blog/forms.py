@@ -9,6 +9,9 @@ class EntryForm(forms.Form):
 
     content = forms.CharField(label="内容", widget=forms.Textarea(attrs={'cols':80, 'rows':12}))
 
+    tags = forms.CharField(label="标签", required=False, widget=forms.TextInput(attrs={'size': 100}))
+
     ## class Meta:
     ##     model = Entry
     ##     fileds = ('title', 'content')
+
