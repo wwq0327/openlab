@@ -7,9 +7,11 @@ from django.conf.urls.defaults import patterns, include, url
 urlpatterns = patterns('',
                        # all home of the site
                        url(r'^$', 'openlab.accounts.views.all_home', name='index'),
-                       url(r'^(\w+)/home/$', 'openlab.accounts.views.home', name='home'),
+                       url(r'^home/$', 'openlab.accounts.views.home', name='home'),
                        # accounts mananger
                        url(r'^accounts/', include('openlab.accounts.urls')),
+                       # blog
+                       url(r'^blog/', include('openlab.blog.urls')),
     # Examples:
     # url(r'^$', 'openlab.views.home', name='home'),
     # url(r'^openlab/', include('openlab.foo.urls')),

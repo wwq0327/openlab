@@ -52,6 +52,9 @@ LOGIN_URL = '/accounts/login/'
 #logout URL
 LOGIN_URL = '/accounts/logout/'
 
+#login redirect to homepage
+LOGIN_REDIRECT_URL = '/home/'
+
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
 MEDIA_ROOT = os.path.join(HERE, 'media')
@@ -133,6 +136,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     'openlab.accounts',
     'openlab.status',
+    'openlab.blog',
 )
 
 # A sample logging configuration. The only tangible logging

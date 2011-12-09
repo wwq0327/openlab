@@ -21,11 +21,12 @@ def all_home(request):
     return render_to_response('index.html', var)
 
 @login_required
-def home(request, username):
+def home(request):
     """登录后所在的个人首页"""
 
-    user = User.objects.get(username=username)
+    user = User.objects.get(username=request.user.username)
 
+    # 反向取得相应用户的数据
     st_list = user.status_set.all()
 
     #form = StatusForm()

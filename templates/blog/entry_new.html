@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %} Blog {% endblock %}
+{% block head %} Blog {% endblock %}
+
+{% block content %}
+
+{% include "blog/_header.html" %}
+
+<form class="entry_new" method="post" action=".">
+{{ form.as_p }}
+<input type="submit" value="发布" />
+</form>
+{% endblock %}
