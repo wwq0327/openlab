@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load comments %}
 {% block title %} Blog {% endblock %}
 {% block head %} Blog {% endblock %}
 
@@ -11,4 +12,12 @@
   {% include "blog/_entry.html" %}
 </ul>
 
+<h2>Comments:</h2>
+{% get_comment_list for page as comment_list %}
+{% for comment in comment_list %}
+{{ comments.comment }}
+{% endfor %}
+
+<h2>Post a comment</h2>
+{% render_comment_form for page %}
 {% endblock %}
