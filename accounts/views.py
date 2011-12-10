@@ -37,6 +37,7 @@ def home(request):
                 content = form.cleaned_data['content'],
                 user = user)
             st.save()
+        return HttpResponseRedirect('/home/')
     else:
         form = StatusForm()
 

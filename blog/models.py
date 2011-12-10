@@ -1,5 +1,6 @@
 from django.db import models
 
+from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
 
 class Tag(models.Model):
@@ -22,6 +23,9 @@ class Entry(models.Model):
 
     class Meta:
         ordering = ['-updated']
+
+    def _get_slug(self):
+        return slugify(self.title)
 
 
 

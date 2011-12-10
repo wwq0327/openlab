@@ -44,6 +44,7 @@ def _entry_save(request, user, form):
         title = form.cleaned_data['title'],
         content = form.cleaned_data['content'],
         user = user)
+
     if not create:
         entry.tags.clear()
 
