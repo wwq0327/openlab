@@ -11,7 +11,7 @@
 <li id="blog_entry">{{ page.content|safe }}</li>
 {% if tag_show %}
 <li>Tags:
-     {% for tag in page.tags.all %}
+     {% for tag in tags %}
      <a href="/{{ user.username }}/blog/tags/{{tag}}/">{{ tag }}</a>
      {% endfor %}
 </li>

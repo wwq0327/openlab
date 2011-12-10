@@ -11,7 +11,7 @@ class Tag(models.Model):
 
 class Entry(models.Model):
     title = models.CharField(max_length=100)
-    slug = models.SlugField()
+    slug = models.SlugField(unique=True)
     content = models.TextField()
     updated = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User)
