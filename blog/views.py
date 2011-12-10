@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import render_to_response
+from django.http import HttpResponseRedirect, HttpResponse, Http404
+from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
@@ -55,7 +55,8 @@ def entry_new(request):
                 entry.tags.add(tag)
 
             entry.save()
-            return HttpResponseRedirect(reverse('entry_lst'))
+            #return HttpResponseRedirect(reverse('entry_lst'))
+            return HttpResponseRedirect('/%s/blog/' % user)
     else:
         form = EntryForm()
 
@@ -75,3 +76,20 @@ def entry_tag(request, tag):
     var = RequestContext(request, {'lists': lists, 'bytag_show': True, 'tag': tag})
 
     return render_to_response('blog/home.html', var)
+
+@login_required
+def entry_edit(request, id):
+    pass
+
+@login_required
+def entry_del(request, id):
+    entry = get_object_or_404(Entry, id=id)
+
+    try:
+        entry.delete()
+    except:
+        raise Http404()
+
+    return HttpResponseRedirect('/%s/blog' % request.user.username)
+
+
