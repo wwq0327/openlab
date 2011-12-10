@@ -10,5 +10,5 @@ urlpatterns = patterns('openlab.blog.views',
                        )
 
 urlpatterns += patterns('',
-                        url(r'^comments/', include('django.contrib.comments.url')),
+                        url(r'^comments/', include('django.contrib.comments.urls')),
                         )
