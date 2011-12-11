@@ -77,3 +77,25 @@ h1 a:link, h1 a, h1 a:hover {
     font-size: 08.em;
 
 }
+
+#blog_title {
+    font-weight: bold;
+    margin: 5px 0 5px 0;
+}
+
+#blog_updated {
+    border-top: 1px dotted #ccc;
+    font-size: 0.7em;
+}
+
+
+.blog-dt {
+    margin: 10px 0 10px 0;
+    padding: 10px 0 10px 0;
+    border: 1px dotted #ccc;
+}
+
+.blog-dt dd {
+    margin: 0;
+    padding: 0;
+}

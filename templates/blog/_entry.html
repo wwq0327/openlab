@@ -1,18 +1,28 @@
 {% load markup %}
-<li id="blog_title"><a href="/{{ user.username }}/blog/entry/{{ entry.id }}/">{{ entry.title }}</a>
+<div class="blog-dt">
+<dt>
+<dd id="blog_title"><a href="/{{ user.username }}/blog/entry/{{ entry.id }}/">{{ entry.title }}</a>
+</dd>
+<dd id="blog_updated">发布时间： {{ entry.updated|date:"Y年m月d日 H时i分" }}
 {% ifequal user entry.user %}
 <span id="edit_del">
 [<a href="/{{ user.username }}/blog/edit/{{ entry.id }}/">编辑</a>]
 [<a href="/{{ user.username }}/blog/del/{{ entry.id }}/">删除</a>]
 </span>
 {% endifequal %}
-</li>
-<li id="blog_updated">发布时间： {{ entry.updated|date:"Y年m月d日 H时i分" }}</li>
-<li id="blog_entry">{{ entry.content|textile|safe }}</li>
+</dd>
+
+<dd id="blog_entry">{{ entry.content|textile|safe }}</dd>
+
 {% if tag_show %}
-<li>Tags:
+<dd>Tags:
      {% for tag in tags %}
      <a href="/{{ user.username }}/blog/tags/{{tag}}/">{{ tag }}</a>
      {% endfor %}
-</li>
+</dd>
+
 {% endif %}
+
+<dt>
+
+</div>

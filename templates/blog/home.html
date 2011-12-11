@@ -11,16 +11,17 @@
 
 {% endif %}
 
-  {% if lists %}
-<ul>
+{% if lists %}
+
   {% for entry in lists %}
-{% include "blog/_entry.html" %}
+  {% include "blog/_entry.html" %}
   <br>
   {% endfor %}
-</ul>
-  {% else %}
+
+{% else %}
        <p>暂无数据</p>
  {% endif %}
+
 
 {% include "common/_show_paginator.html" %}
 
