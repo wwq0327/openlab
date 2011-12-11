@@ -12,7 +12,10 @@ from openlab.status.models import Status
 
 @login_required
 def st_del_page(request, username, id):
-    st_page = get_object_or_404(Status, id=id)
+    if username == request.user.username:
+        st_page = get_object_or_404(Status, id=id)
+    else:
+        raise Http404()
 
     try:
         st_page.delete()

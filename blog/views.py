@@ -21,7 +21,7 @@ def _get_username(r):
     return User.objects.get(username=r.user.username)
 
 @login_required
-def entry_list(request):
+def entry_list(request, username):
     #user = User.objects.get(username=request.user.username)
     user = _get_username(request)
 
@@ -55,7 +55,7 @@ def entry_list(request):
 
 
 @login_required
-def entry_page(request, id):
+def entry_page(request, usernaem, id):
     entry = Entry.objects.get(id=id)
     ## 中文Tag解析
     tags = [tag.tag for tag in entry.tags.all()]
@@ -84,7 +84,7 @@ def _entry_save(request, user, form):
     return entry
 
 @login_required
-def entry_new(request):
+def entry_new(request, username):
     user = _get_username(request)
 
     if request.method == 'POST':
@@ -112,7 +112,7 @@ def entry_new(request):
     return render_to_response('blog/entry_new.html', var)
 
 @login_required
-def entry_tag(request, tag):
+def entry_tag(request, username, tag):
     """根据tag查找相应的entry"""
 
     t = Tag.objects.get(tag=tag)
@@ -124,7 +124,9 @@ def entry_tag(request, tag):
     return render_to_response('blog/home.html', var)
 
 @login_required
-def entry_edit(request, id):
+def entry_edit(request, username, id):
+    if not username == request.user.username:
+        raise Http404()
     entry = get_object_or_404(Entry, id=id)
     title = entry.title
     content = entry.content
@@ -151,8 +153,12 @@ def entry_edit(request, id):
     return render_to_response('blog/entry_new.html', var)
 
 @login_required
-def entry_del(request, id):
-    entry = get_object_or_404(Entry, id=id)
+def entry_del(request, username, id):
+
+    if username == request.user.username:
+        entry = get_object_or_404(Entry, id=id)
+    else:
+        raise Http404()
 
     try:
         entry.delete()

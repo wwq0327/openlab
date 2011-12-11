@@ -11,7 +11,7 @@ urlpatterns = patterns('',
                        # accounts mananger
                        url(r'^accounts/', include('openlab.accounts.urls')),
                        # blog
-                       url(r'^(\w+)/blog/', include('openlab.blog.urls')),
+                       url(r'^(?P<username>\w+)/blog/', include('openlab.blog.urls')),
                        #url(r'^$', include('openlab.status.urls')),
                        url(r'^(?P<username>\w+)/home/st/(?P<id>\d+)/del/$', 'openlab.status.views.st_del_page', name='st_del'),
 

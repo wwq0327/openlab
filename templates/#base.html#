@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>{% block title %}{% endblock %} -- OpenLab 开放学习平台</title>
+  <link href="/static/styles/style.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="/static/js/jquery.js"></script>
+{% block external %}{% endblock %}
+</head>
+
+<body class="body">
+
+<!-- 页面头开始 -->
+<div class="head">
+<h1><a href="/">OpenLab -- 开放学习平台</a></h1>
+</div>
+<!-- 页头结束 -->
+
+<!-- 导航开始 -->
+<div class="nav">
+<a href="/">Home</a> |
+
+{% if user.is_authenticated %}
+<a href='/{{ user.username }}/home/'>个人主页</a> |
+<a href='/{{ user.username }}/blog/'>日志</a> |
+<a href='/{{ user.username }}/friends/'>好友</a> |
+<a href="/accounts/logout/">退出</a> |
+{% else %}
+<a href="/accounts/login/">登录</a> |
+<a href="/accounts/register">注册</a> |
+{% endif %}
+
+<a href="/help/help/">Help</a>
+</div>
+<!-- 导航结束 -->
+<hr>
+<h2>
+
+{% block head %}{% endblock %}
+</h2>
+<!-- 主体开始 -->
+<div class="content">
+{% block content %}{% endblock %}
+</div>
+<!-- 主体结束 -->
+
+<!-- 页脚开始 -->
+<div class="footer">
+<hr>
+copyright (c) OpenLab.
+</div>
+<!-- 页脚结束 -->
+
+</body>
+</html>

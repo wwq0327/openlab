@@ -14,13 +14,14 @@
 {% endif %}
 {% endifequal %}
 
-
-
 <div class="status-list">
 {% if st_list %}
   <dt>
     {% for st in st_list %}
-      <dd><sub>[<a href="/{{ user.username }}/home/st/{{st.id}}/del/">删除</a>]</sub> {{ st.content|safe }}  <sub>@{{ st.updated|date:"Y年m月d日 H时i分"}}</sub> </dd>
+      <dd> {% ifequal user.username username %}
+           <sub>[<a href="/{{ user.username }}/home/st/{{st.id}}/del/">删除</a>]</sub>
+           {% endifequal %}
+           {{ st.content|safe }}  <sub>@{{ st.updated|date:"Y年m月d日 H时i分"}}</sub> </dd>
     {% endfor %}
   </dt>
 {% else %}
