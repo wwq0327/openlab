@@ -4,20 +4,17 @@
 
 {% block content %}
 
-<p> 欢迎你 {{ user.username }}!</p>
-
 {% include "common/_status.html" %}
-
+<div class="status-list">
 {% if st_list %}
-  <ul class="status-list">
+  <dt>
     {% for st in st_list %}
-      <li><sub>[<a href="/{{ user.username }}/home/st/{{st.id}}/del/">删除</a>]</sub> {{ st.content }}  <sub>@{{ st.updated|date:"Y年m月d日 H时i分"}}</sub> </li>
+      <dd><sub>[<a href="/{{ user.username }}/home/st/{{st.id}}/del/">删除</a>]</sub> {{ st.content|safe }}  <sub>@{{ st.updated|date:"Y年m月d日 H时i分"}}</sub> </dd>
     {% endfor %}
-  </ul>
-
-{% include "common/_show_paginator.html" %}
+  </dt>
 {% else %}
   <p>您什么情感状态也没有留下~~</p>
 {% endif %}
-
+</div>
+{% include "common/_show_paginator.html" %}
 {% endblock %}

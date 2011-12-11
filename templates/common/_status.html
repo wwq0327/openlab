@@ -1,4 +1,7 @@
 <form id="status-form" method="post" action=".">
-{{ form.as_p }}
+{% csrf_token %}
+<p><label for="id_content">情感状态：</label></p>
+<p><textarea id="id_content" cols="50" rows="2" cols="40" name="content"></textarea></p>
 <input type="submit" value="提交" />
+
 </form>

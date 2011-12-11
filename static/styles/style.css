@@ -57,11 +57,23 @@ h1 a:link, h1 a, h1 a:hover {
     color: #999
 }
 
-
-#nav {
+.st-input {
     float: right;
 }
 
 .edit_del {
     font-size: 0.8em;
+}
+
+.status-list dt {
+    margin: 0 5px 5px 0;
+    padding: 5px 0 5px 5px;
+}
+
+.status-list dd {
+    border-bottom: 1px dotted #ccc;
+    margin: 5px 0 5px 0;
+    padding: 5px 0 5px 0;
+    font-size: 08.em;
+
 }
