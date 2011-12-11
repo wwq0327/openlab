@@ -55,7 +55,7 @@ def entry_list(request, username):
 
 
 @login_required
-def entry_page(request, usernaem, id):
+def entry_page(request, username, id):
     entry = Entry.objects.get(id=id)
     ## 中文Tag解析
     tags = [tag.tag for tag in entry.tags.all()]
