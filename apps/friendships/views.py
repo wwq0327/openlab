@@ -23,7 +23,7 @@ def friends_page(request, username):
     return render_to_response('friendships/friends_page.html', var)
 
 @login_required
-def friend_all(request):
+def friend_add(request):
     if request.GET.has_key('username'):
         friend = get_object_or_404(User, username=request.GET['username'])
         friendship = Friendship(from_friend=request.user,
