@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}{{ username }}的好友{% endblock %}
+{% block content %}
+
+<b>{{ username }}的好友列表：</b>
+{% if friends %}
+<ul class="friends">
+{% for friend in friends %}
+<li><a href="/{{ friend.username}}/home/">{{ friend.username }}</a></li>
+{% endfor %}
+</ul>
+{% else %}
+<p>你暂时还没有好友~~</p>
+     {% endif %}
+{% endblock %}

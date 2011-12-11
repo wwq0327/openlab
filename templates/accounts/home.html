@@ -3,8 +3,19 @@
 {% block head %} 欢迎来到OpenLab 开放学习平台！ {% endblock %}
 
 {% block content %}
-
+{# URL使用为当前登录用户时，刚显示 #}
+{% ifequal user.username username %}
 {% include "common/_status.html" %}
+{% else %}
+{% if is_friend %}
+已关注
+{% else %}
+<a href='/{{username}}/friends/add/'>关注Ta</a>
+{% endif %}
+{% endifequal %}
+
+
+
 <div class="status-list">
 {% if st_list %}
   <dt>

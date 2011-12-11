@@ -15,4 +15,7 @@ urlpatterns = patterns('',
                        #url(r'^$', include('openlab.status.urls')),
                        url(r'^(?P<username>\w+)/home/st/(?P<id>\d+)/del/$', 'openlab.status.views.st_del_page', name='st_del'),
 
+                       #friendships
+                       url(r'^(?P<username>\w+)/friends/', include('openlab.apps.friendships.urls')),
+
                        )

@@ -13,6 +13,8 @@ from django.contrib.auth.models import User
 from openlab.status.models import Status
 
 from openlab.status.forms import StatusForm
+from openlab.accounts.forms import RegistrationForm
+from openlab.apps.friendships.models import Friendship
 
 _ST_PRE_PAGE = 10
 
@@ -33,6 +35,11 @@ def home(request, username):
     # 反向取得相应用户的数据
     q_set = user.status_set.all()
     paginator = Paginator(q_set, _ST_PRE_PAGE)
+
+    ## 好友关系
+    is_friend = Friendship.objects.filter(from_friend=request.user,
+                                          to_friend=user)
+
 
     try:
         page = int(request.GET['page'])
@@ -66,8 +73,42 @@ def home(request, username):
                                    'pages': paginator.num_pages,
                                    'next_page': page + 1,
                                    'prev_page': page - 1,
+                                   'is_friend': is_friend,
+                                   'username': username
                                    })
     return render_to_response('accounts/home.html', var)
+
+def register_page(request):
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            user = User.objects.create_user(
+                username = form.cleaned_data['username'],
+                password = form.cleaned_data['password1'],
+                email = form.cleaned_data['email']
+                )
+            ## 来自于邀请的注册
+            ## if 'invitation' in request.session:
+            ##     invitation = Invitation.objects.get(id=request.session['invistation'])
+            ##     #建立好友关系
+            ##     friendship = Friendship(from_friend=user, to_friend=invitation.sender)
+            ##     friendship.save()
+
+            ##     ## 双向
+            ##     friendship = Friendship(from_friend=invitation.sender, to_friend=user)
+            ##     friendship.save()
+
+            ##     invitation.delete()
+            ##     del request.session['invitation']
+
+            return HttpResponseRedirect('/accounts/register/success/')
+
+    else:
+        form = RegistrationForm()
+
+    return render_to_response('accounts/register.html',
+                              {'form': form}
+                              )
 
 @login_required
 def logout_view(request):

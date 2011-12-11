@@ -139,6 +139,7 @@ INSTALLED_APPS = (
     'openlab.accounts',
     'openlab.status',
     'openlab.blog',
+    'openlab.apps.friendships',
 )
 
 # A sample logging configuration. The only tangible logging
