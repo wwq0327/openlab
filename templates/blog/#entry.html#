@@ -12,7 +12,7 @@
   {% include "blog/_entry.html" %}
 </ul>
 
-{% include "common/_show_paginator.html %}
+
 
 {% load comments %}
 <h2>Comments:</h2>

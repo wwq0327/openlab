@@ -1,14 +1,14 @@
 {% load markup %}
-<li id="blog_title"><a href="/{{ user.username }}/blog/entry/{{ page.id }}/">{{ page.title }}</a>
-{% ifequal user page.user %}
+<li id="blog_title"><a href="/{{ user.username }}/blog/entry/{{ entry.id }}/">{{ entry.title }}</a>
+{% ifequal user entry.user %}
 <span id="edit_del">
-[<a href="/{{ user.username }}/blog/edit/{{ page.id }}/">编辑</a>]
-[<a href="/{{ user.username }}/blog/del/{{ page.id }}/">删除</a>]
+[<a href="/{{ user.username }}/blog/edit/{{ entry.id }}/">编辑</a>]
+[<a href="/{{ user.username }}/blog/del/{{ entry.id }}/">删除</a>]
 </span>
 {% endifequal %}
 </li>
-<li id="blog_updated">发布时间： {{ page.updated|date:"Y年m月d日 H时i分" }}</li>
-<li id="blog_entry">{{ page.content|textile|safe }}</li>
+<li id="blog_updated">发布时间： {{ entry.updated|date:"Y年m月d日 H时i分" }}</li>
+<li id="blog_entry">{{ entry.content|textile|safe }}</li>
 {% if tag_show %}
 <li>Tags:
      {% for tag in tags %}

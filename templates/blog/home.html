@@ -13,7 +13,7 @@
 
   {% if lists %}
 <ul>
-  {% for page in lists %}
+  {% for entry in lists %}
 {% include "blog/_entry.html" %}
   <br>
   {% endfor %}
@@ -21,5 +21,7 @@
   {% else %}
        <p>暂无数据</p>
  {% endif %}
+
+{% include "common/_show_paginator.html" %}
 
 {% endblock %}

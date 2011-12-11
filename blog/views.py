@@ -6,12 +6,16 @@ from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
+from django.core.paginator import Paginator
 
 from django.contrib.auth.models import User
 from openlab.blog.models import Entry, Tag
 
 ## forms
 from openlab.blog.forms import EntryForm
+
+## 每页显示日志条数
+_BLOG_PRE_PAGE = 5
 
 def _get_username(r):
     return User.objects.get(username=r.user.username)
@@ -21,20 +25,42 @@ def entry_list(request):
     #user = User.objects.get(username=request.user.username)
     user = _get_username(request)
 
-    lists = user.entry_set.all()
+    q_set = user.entry_set.all()
 
-    var = RequestContext(request, {'lists': lists, 'tag_show': False})
+    paginator = Paginator(q_set, _BLOG_PRE_PAGE)
+
+    try:
+        page = int(request.GET['page'])
+    except:
+        page = 1
+
+    try:
+        lists = paginator.page(page)
+    except:
+        Http404
+
+
+    var = RequestContext(request, {'lists': lists.object_list,
+                                   'tag_show': False,
+                                   'show_p': paginator.num_pages > 1,
+                                   'has_prev': lists.has_previous(),
+                                   'has_next': lists.has_next(),
+                                   'page': page,
+                                   'pages': paginator.num_pages,
+                                   'next_page': page + 1,
+                                   'prev_page': page - 1,
+                                   })
 
     return render_to_response('blog/home.html', var)
 
 
 @login_required
 def entry_page(request, id):
-    page = Entry.objects.get(id=id)
+    entry = Entry.objects.get(id=id)
     ## 中文Tag解析
-    tags = [tag.tag for tag in page.tags.all()]
+    tags = [tag.tag for tag in entry.tags.all()]
 
-    var = RequestContext(request, {'page': page, 'tag_show': True, 'tags':tags})
+    var = RequestContext(request, {'entry': entry, 'tag_show': True, 'tags':tags})
 
     return render_to_response('blog/entry.html', var)
 
