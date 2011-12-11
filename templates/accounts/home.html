@@ -8,7 +8,7 @@
 {% include "common/_status.html" %}
 {% else %}
 {% if is_friend %}
-已关注
+已关注| <a href="/{{username}}/friends/unfollow/">取消</a>
 {% else %}
 <a href='/{{username}}/friends/add/'>关注Ta</a>
 {% endif %}
