@@ -1,3 +1,63 @@
+body {
+    max-width: 1024px;
+    margin: 0 auto;
+    font-size: 12pt;
+    background-color: white;
+    color: #606060;
+    line-leight: 1.25em;
+}
+
+input,
+textarea {
+    padding: 5px;
+    font-size: 14pt;
+    boder: 1px solid #ddd;
+}
+
+textarea {
+    margin: 0;
+}
+
+a:link, a {
+    color: #202020;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #3366cc;
+    border-bottom: 1px dotted #3366cc;
+}
+
+h1 {
+    padding: 0 0 0.5 0;
+    font-weight: normal;
+    font-size: 2em;
+}
+
+pre, code {
+    font-family: monospace;
+    color: #060;
+}
+
+pre {
+    margin-left: 1em;
+    padding-left: 1em;
+    border-left: 1px solid silver;
+    line-height: 14pt;
+}
+
+#line {
+    padding-top: 5px;
+    clear: both;
+    border-bottom: 1px solid #ccc;
+}
+
+h1 a:link, h1 a, h1 a:hover {
+    text-decoration: nono;
+    color: #999
+}
+
+
 #nav {
     float: right;
 }
