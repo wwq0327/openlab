@@ -133,6 +133,6 @@ def entry_del(request, id):
     except:
         raise Http404()
 
-    return HttpResponseRedirect('/%s/blog' % request.user.username)
+    return HttpResponseRedirect('/%s/blog/' % request.user.username)
 
 

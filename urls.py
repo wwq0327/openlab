@@ -7,18 +7,12 @@ from django.conf.urls.defaults import patterns, include, url
 urlpatterns = patterns('',
                        # all home of the site
                        url(r'^$', 'openlab.accounts.views.all_home', name='index'),
-                       url(r'^home/$', 'openlab.accounts.views.home', name='home'),
+                       url(r'^(?P<username>\w+)/home/$', 'openlab.accounts.views.home', name='home'),
                        # accounts mananger
                        url(r'^accounts/', include('openlab.accounts.urls')),
                        # blog
                        url(r'^(\w+)/blog/', include('openlab.blog.urls')),
-    # Examples:
-    # url(r'^$', 'openlab.views.home', name='home'),
-    # url(r'^openlab/', include('openlab.foo.urls')),
+                       #url(r'^$', include('openlab.status.urls')),
+                       url(r'^(?P<username>\w+)/home/st/(?P<id>\d+)/del/$', 'openlab.status.views.st_del_page', name='st_del'),
 
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Uncomment the next line to enable the admin:
-    # url(r'^admin/', include(admin.site.urls)),
-)
+                       )

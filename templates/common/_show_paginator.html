@@ -1,0 +1,16 @@
+<!-- page num -->
+{% if show_p %}
+<div class="paginator">
+{% if has_prev %}
+<a href="?page={{ prev_page }}">&laquo; 前页</a>
+{% endif %}
+
+{% if has_next %}
+<a href="?page={{ next_page }}">下页 &raquo;</a>
+{% endif %}
+
+(当前位置： {{ page }}/{{pages}})
+</div>
+{% endif %}
+
+<!-- 页码完 -->
