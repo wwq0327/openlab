@@ -12,10 +12,10 @@ class Tag(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=32)
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, related_name="categories")
 
     def __unicode__(self):
-        return '%s, %s' % (self.name, self.user.username)
+        return '%s' % self.name
 
 class Entry(models.Model):
     title = models.CharField(max_length=100)

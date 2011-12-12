@@ -2,7 +2,8 @@
 # -*- coding: utf-8 -*-
 
 from django import forms
-#from blog.models import Entry
+
+from blog.models import Category
 
 class EntryForm(forms.Form):
     title = forms.CharField(label="标题", widget=forms.TextInput(attrs={'size': 68}))
@@ -11,9 +12,9 @@ class EntryForm(forms.Form):
 
     tags = forms.CharField(label="标签", required=False, widget=forms.TextInput(attrs={'size': 68}))
 
-    ## class Meta:
-    ##     model = Entry
-    ##     fileds = ('title', 'content')
+    ##category = forms.ModelChoiceField(queryset=None, label="分类", empty_label="------------")
+
+    category = forms.ChoiceField(label="分类", choices={})
 
 class CategoryForm(forms.Form):
     name = forms.CharField(label="分类名称", widget=forms.TextInput(attrs={'size': 20}))
