@@ -7,12 +7,13 @@ from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.core.paginator import Paginator
+from django.core.exceptions import ObjectDoesNotExist
 
 from django.contrib.auth.models import User
-from openlab.blog.models import Entry, Tag
+from openlab.blog.models import Entry, Tag, Category
 
 ## forms
-from openlab.blog.forms import EntryForm
+from openlab.blog.forms import EntryForm, CategoryForm
 
 ## 每页显示日志条数
 _BLOG_PRE_PAGE = 5
@@ -66,6 +67,8 @@ def entry_page(request, username, id):
 
 def _entry_save(request, user, form):
 
+    ## BUG: 当修改标题后，日志会重复发布一次。
+
     entry, create = Entry.objects.get_or_create(
         title = form.cleaned_data['title'],
         content = form.cleaned_data['content'],
@@ -92,17 +95,6 @@ def entry_new(request, username):
         if form.is_valid():
             entry = _entry_save(request, user, form)
 
-            ## entry = Entry.objects.create(
-            ##     title = form.cleaned_data['title'],
-            ##     content = form.cleaned_data['content'],
-            ##     user = user)
-            ## tag_names = form.cleaned_data['tags'].split()
-            ## for tag_name in tag_names:
-            ##     tag, dummy = Tag.objects.get_or_create(tag=tag_name, user=user)
-            ##     entry.tags.add(tag)
-
-            ## entry.save()
-            #return HttpResponseRedirect(reverse('entry_lst'))
             return HttpResponseRedirect('/%s/blog/' % user)
     else:
         form = EntryForm()
@@ -166,5 +158,54 @@ def entry_del(request, username, id):
         raise Http404()
 
     return HttpResponseRedirect('/%s/blog/' % request.user.username)
+
+@login_required
+def category_list(request, username):
+
+    user = User.objects.get(username=username)
+
+    categories  = Category.objects.filter(user=user)
+
+    if request.method == 'POST':
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            cate = Category.objects.create(
+                name = form.cleaned_data['name'],
+                user = user)
+            cate.save()
+
+            return HttpResponseRedirect("/%s/blog/category/" % request.user.username)
+    else:
+        form = CategoryForm()
+
+    var = RequestContext(request, {'categories': categories,
+                                   'form': form,
+                                   'is_auth': username == request.user.username ## 判断当前分类所在用户是否为登录用户
+                                   })
+
+    return render_to_response('blog/category_list_add.html', var)
+
+@login_required
+def category_del(request, username, id):
+
+    if username == request.user.username:
+
+        try:
+            cate = Category.objects.get(id=id)
+
+        except ObjectDoesNotExist:
+            pass
+
+        cate.delete()
+
+    else:
+        raise Http404()
+
+    return HttpResponseRedirect("/%s/blog/category/" % request.user.username)
+
+
+
+
+
 
 

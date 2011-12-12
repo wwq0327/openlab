@@ -15,3 +15,5 @@ class EntryForm(forms.Form):
     ##     model = Entry
     ##     fileds = ('title', 'content')
 
+class CategoryForm(forms.Form):
+    name = forms.CharField(label="分类名称", widget=forms.TextInput(attrs={'size': 20}))

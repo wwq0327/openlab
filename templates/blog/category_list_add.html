@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %} Blog {% endblock %}
+{% block head %} Blog {% endblock %}
+
+{% block content %}
+
+{% include "blog/_header.html" %}
+
+{% if categories %}
+<h3>已有分类：</h3>
+<ul>
+{% for category in categories %}
+<li> {{ category.name }}  -- {% if is_auth %} [<a href="/{{ category.user.username }}/blog/category/{{ category.id }}/del/">删除</a>] {% endif %}</li>
+{% endfor %}
+</ul>
+
+{% else %}
+
+<b>暂时没有分类。</b>
+
+{% endif %}
+
+{% if is_auth %}
+<h3>创建分类：</h3>
+<div class="category-form">
+<form action="." method="post">
+{{ form.as_p }}
+<input type="submit" value="创建分类"/>
+</form>
+</div>
+{% endif %}
+{% endblock %}
