@@ -70,7 +70,6 @@ def _entry_save(request, user, form):
     ## BUG: 当修改标题后，日志会重复发布一次。
 
     c_id = form.cleaned_data['category']
-    print type(c_id)
 
     category = Category.objects.get(id=c_id)
 
