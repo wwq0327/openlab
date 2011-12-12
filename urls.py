@@ -17,5 +17,6 @@ urlpatterns = patterns('',
 
                        #friendships
                        url(r'^(?P<username>\w+)/friends/', include('openlab.apps.friendships.urls')),
+                       url(r'^comments/', include('django.contrib.comments.urls')),
 
                        )

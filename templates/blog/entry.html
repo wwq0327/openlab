@@ -10,13 +10,18 @@
   {% include "blog/_entry.html" %}
 
 {% load comments %}
-<h2>Comments:</h2>
+
 {% get_comment_list for blog.entry entry.id as comment_list %}
+{% get_comment_count for blog.entry entry.id as comment_count %}
+<div class="comment">
+<p><b>本日志共有 {{ comment_count }} 篇评论：</b></p>
 {% for comment in comment_list %}
-{{ comments.comment }}
+<a href="/{{ comment.user.username }}/home/">{{ comment.user.username }}</a> 在 {{ comment.submit_date|date:"Y年m月d日 H时i分" }} 说道：
+<p>{{ comment.comment|escape|urlizetrunc:40|linebreaks }}</p>
+</div>
 {% endfor %}
 
-<h2>Post a comment</h2>
+<h3>你的评论:</h3>
 {% render_comment_form for blog.entry entry.id %}
 
 {% endblock %}

@@ -9,6 +9,6 @@ urlpatterns = patterns('openlab.blog.views',
                        url(r'^del/(?P<id>\d+)/$', 'entry_del', name='edtry_del'),
                        )
 
-urlpatterns += patterns('',
-                        url(r'^comments/', include('django.contrib.comments.urls')),
-                        )
+## urlpatterns += patterns('',
+##                         url(r'^comments/', include('django.contrib.comments.urls')),
+##                         )
