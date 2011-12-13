@@ -220,12 +220,11 @@ def category_entry(request, username, id):
     #user = User.objects.get(username=username)
     user = get_object_or_404(User, username=username)
 
-    cc = user.categories.get(id=id)
-
-    if cc:
-        lists = Entry.objects.filter(category=cc)
-    else:
-        lists = ''
+    try:
+        cc = user.categories.get(id=id)
+        lists = cc.entry_set.all()
+    except ObjectDoesNotExist:
+        pass
 
     var = RequestContext(request, {
         'lists': lists,
@@ -233,7 +232,7 @@ def category_entry(request, username, id):
         'name':cc.name
         })
 
-    return render_to_response('blog/entry.html', var)
+    return render_to_response('blog/home.html', var)
 
 
 

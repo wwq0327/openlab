@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %} Blog {% endblock %}
+{% block head %} Blog {% endblock %}
+
+{% block content %}
+
+{% include "blog/_header.html" %}
+
+{% if bytag_show %}
+
+<p> 你所查找的含有 "<b><em>{{ tag }}</em></b>" 标签的文章共计 <b><em>{{ lists.count }} </em></b> 篇：</p>
+
+{% endif %}
+
+{% if show_cg %}
+
+<p> 你所查找的含有 "<b><em>{{  name }}</em></b>" 分类文章共计 <b><em>{{ lists.count }} </em></b> 篇：</p>
+
+{% endif %}
+
+{% if lists %}
+
+  {% for entry in lists %}
+  {% include "blog/_entry.html" %}
+  <br>
+  {% endfor %}
+
+{% else %}
+       <p>暂无数据</p>
+ {% endif %}
+
+
+{% include "common/_show_paginator.html" %}
+
+{% endblock %}
