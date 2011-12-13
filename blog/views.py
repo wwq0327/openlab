@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import hashlib
 
 from django.http import HttpResponseRedirect, HttpResponse, Http404
 from django.shortcuts import render_to_response, get_object_or_404
@@ -17,6 +18,11 @@ from openlab.blog.forms import EntryForm, CategoryForm
 
 ## 每页显示日志条数
 _BLOG_PRE_PAGE = 5
+
+def _gen_hash_st(s):
+    h = hashlib.md5()
+    h.update(s)
+    return 'post_' + h.hexdigest()[:16]
 
 def _get_username(r):
     return User.objects.get(username=r.user.username)
@@ -70,17 +76,21 @@ def _entry_save(request, user, form):
     ## BUG: 当修改标题后，日志会重复发布一次。
 
     c_id = form.cleaned_data['category']
+    title = form.cleaned_data['title']
+    ##slug = _gen_hash_st(title)
 
     category = Category.objects.get(id=c_id)
 
     entry, create = Entry.objects.get_or_create(
         title = form.cleaned_data['title'],
         content = form.cleaned_data['content'],
+       ## slug = slug,
         user = user,
         category=category)
 
     if not create:
         entry.tags.clear()
+
 
     tag_names = form.cleaned_data['tags'].split()
     for tag_name in tag_names:
