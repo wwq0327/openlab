@@ -14,7 +14,13 @@ class EntryForm(forms.Form):
 
     ##category = forms.ModelChoiceField(queryset=None, label="分类", empty_label="------------")
 
-    category = forms.ChoiceField(label="分类", choices={})
+    category = forms.ChoiceField(label="分类")
+
+    def __init__(self, user, *args, **kwargs):
+        self.user = user
+        super(EntryForm, self).__init__(*args, **kwargs)
+        self.fields['category'].choices = [('', '-----------')] + \
+                                          [(o.id, o.name) for o in self.user.categories.all()]
 
 class CategoryForm(forms.Form):
     name = forms.CharField(label="分类名称", widget=forms.TextInput(attrs={'size': 20}))

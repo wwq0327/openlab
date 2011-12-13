@@ -96,8 +96,8 @@ def entry_new(request, username):
     user = _get_username(request)
 
     if request.method == 'POST':
-        form = EntryForm(request.POST)
-
+        form = EntryForm(user, request.POST)
+        #form.fields['category'].choices = [(o.id, o) for o in user.categories.all()]
         if form.is_valid():
             entry = _entry_save(request, user, form)
 
@@ -105,9 +105,9 @@ def entry_new(request, username):
         else:
             print form.errors
     else:
-        form = EntryForm()
+        form = EntryForm(user)
         #form.fields['category'].queryset = user.categories.all()
-        form.fields['category'].choices = [(o.id, o) for o in user.categories.all()]
+        #form.fields['category'].choices = [(o.id, o) for o in user.categories.all()]
 
     var = RequestContext(request, {'form':form})
 
@@ -133,6 +133,7 @@ def entry_edit(request, username, id):
     title = entry.title
     content = entry.content
     tags = ''
+
     try:
         tags = ' '.join(tag.tag for tag in entry.tags.all())
     except:
@@ -142,13 +143,15 @@ def entry_edit(request, username, id):
 
 
     if request.method == 'POST':
-        myform = EntryForm(request.POST)
-        if myform.is_valid():
-            e = _entry_save(request, user, myform)
+        form = EntryForm(user, request.POST)
+        #myform.fields['category'].choices = [(o.id, o) for o in user.categories.all()]
+        if form.is_valid():
+            e = _entry_save(request, user, form)
 
         return HttpResponseRedirect("/%s/blog/entry/%s/" % (user, id))
     else:
-        form = EntryForm({'title': title, 'content': content, 'tags':  tags})
+        form = EntryForm(user, {'title': title, 'content': content, 'tags':  tags})
+        ## form.fields['category'].choices = [(o.id, o) for o in user.categories.all()]
 
     var = RequestContext(request, {'form':form})
 
@@ -211,6 +214,26 @@ def category_del(request, username, id):
         raise Http404()
 
     return HttpResponseRedirect("/%s/blog/category/" % request.user.username)
+
+@login_required
+def category_entry(request, username, id):
+    #user = User.objects.get(username=username)
+    user = get_object_or_404(User, username=username)
+
+    cc = user.categories.get(id=id)
+
+    if cc:
+        lists = Entry.objects.filter(category=cc)
+    else:
+        lists = ''
+
+    var = RequestContext(request, {
+        'lists': lists,
+        'show_cg': True,
+        'name':cc.name
+        })
+
+    return render_to_response('blog/entry.html', var)
 
 
 

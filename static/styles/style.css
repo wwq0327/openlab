@@ -87,7 +87,8 @@ h1 a:link, h1 a, h1 a:hover {
     margin: 5px 0 5px 0;
 }
 
-#blog_updated {
+#blog_updated,
+#blog_tags {
     border-top: 1px dotted #ccc;
     font-size: 0.7em;
 }

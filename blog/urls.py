@@ -9,6 +9,7 @@ urlpatterns = patterns('openlab.blog.views',
                        url(r'^del/(?P<id>\d+)/$', 'entry_del', name='edtry_del'),
                        url(r'^category/(?P<id>\d+)/del/$', 'category_del', name='cg_del'),
                        url(r'^category/$', 'category_list', name='cg_list'),
+                       url(r'^category/(?P<id>\d+)/$', 'category_entry', name='cg_entry'),
                        )
 
 ## urlpatterns += patterns('',

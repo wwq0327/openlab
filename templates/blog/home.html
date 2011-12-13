@@ -11,6 +11,12 @@
 
 {% endif %}
 
+{% if show_cg %}
+
+<p> 你所查找的含有 "<b><em>{{  name }}</em></b>" 分类文章共计 <b><em>{{ lists.count }} </em></b> 篇：</p>
+
+{% endif %}
+
 {% if lists %}
 
   {% for entry in lists %}

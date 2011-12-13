@@ -14,15 +14,19 @@
 
 <dd id="blog_entry">{{ entry.content|textile|safe }}</dd>
 
+<div id="blog_tags">
 {% if tag_show %}
 <dd>Tags:
      {% for tag in tags %}
      <a href="/{{ user.username }}/blog/tags/{{tag}}/">{{ tag }}</a>
      {% endfor %}
-</dd>
 
 {% endif %}
 
+所属分类： <a href="/{{ user.username}}/blog/category/{{ entry.category.id|urlencode }}">{{ entry.category.name }}</a>
+
+</dd>
 <dt>
+</div>
 
 </div>
