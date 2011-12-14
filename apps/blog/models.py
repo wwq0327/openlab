@@ -4,11 +4,15 @@ from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
 
 class Tag(models.Model):
-    tag = models.CharField(max_length=64, unique=True)
+    tag = models.CharField(max_length=64)
     user = models.ForeignKey(User)
 
-    def __str__(self):
+    def __unicode__(self):
         return '%s' % self.tag
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('entry_pg', (), {'id': self.id})
 
 class Category(models.Model):
     name = models.CharField(max_length=32)

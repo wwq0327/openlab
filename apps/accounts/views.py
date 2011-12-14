@@ -29,8 +29,8 @@ def all_home(request):
 def home(request, username):
     """登录后所在的个人首页"""
     #username = request.user.username
-    #user = User.objects.get(username=username)
-    user = get_object_or_404(User, username=username)
+    user = User.objects.get(username=username)
+    #user = get_object_or_404(User, username=username)
 
     # 反向取得相应用户的数据
     q_set = user.status_set.all()

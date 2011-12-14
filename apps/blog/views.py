@@ -27,10 +27,14 @@ def _gen_hash_st(s):
 def _get_username(r):
     return User.objects.get(username=r.user.username)
 
+def _get_this_user(username):
+    return User.objects.get(username=username)
+
 @login_required
 def entry_list(request, username):
     #user = User.objects.get(username=request.user.username)
-    user = _get_username(request)
+    #user = _get_username(request)
+    user = _get_this_user(username)
 
     q_set = user.entry_set.all()
 
@@ -56,6 +60,7 @@ def entry_list(request, username):
                                    'pages': paginator.num_pages,
                                    'next_page': page + 1,
                                    'prev_page': page - 1,
+                                   'username': username,
                                    })
 
     return render_to_response('blog/home.html', var)
@@ -67,7 +72,7 @@ def entry_page(request, username, id):
     ## 中文Tag解析
     tags = [tag.tag for tag in entry.tags.all()]
 
-    var = RequestContext(request, {'entry': entry, 'tag_show': True, 'tags':tags})
+    var = RequestContext(request, {'entry': entry, 'tag_show': True, 'tags':tags, 'username':username})
 
     return render_to_response('blog/entry.html', var)
 
