@@ -136,9 +136,9 @@ INSTALLED_APPS = (
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-    'openlab.accounts',
-    'openlab.status',
-    'openlab.blog',
+    'openlab.apps.accounts',
+    'openlab.apps.status',
+    'openlab.apps.blog',
     'openlab.apps.friendships',
 )
 

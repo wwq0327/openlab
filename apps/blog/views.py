@@ -11,10 +11,10 @@ from django.core.paginator import Paginator
 from django.core.exceptions import ObjectDoesNotExist
 
 from django.contrib.auth.models import User
-from openlab.blog.models import Entry, Tag, Category
+from openlab.apps.blog.models import Entry, Tag, Category
 
 ## forms
-from openlab.blog.forms import EntryForm, CategoryForm
+from openlab.apps.blog.forms import EntryForm, CategoryForm
 
 ## 每页显示日志条数
 _BLOG_PRE_PAGE = 5

@@ -3,7 +3,7 @@
 
 from django import forms
 
-from blog.models import Category
+from openlab.apps.blog.models import Category
 
 class EntryForm(forms.Form):
     title = forms.CharField(label="标题", widget=forms.TextInput(attrs={'size': 68}))

@@ -10,10 +10,10 @@ from django.core.urlresolvers import reverse
 from django.core.paginator import Paginator
 
 from django.contrib.auth.models import User
-from openlab.status.models import Status
+from openlab.apps.status.models import Status
 
-from openlab.status.forms import StatusForm
-from openlab.accounts.forms import RegistrationForm
+from openlab.apps.status.forms import StatusForm
+from openlab.apps.accounts.forms import RegistrationForm
 from openlab.apps.friendships.models import Friendship
 
 _ST_PRE_PAGE = 10

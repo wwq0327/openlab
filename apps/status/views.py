@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 
 from django.contrib.auth.models import User
-from openlab.status.models import Status
+from openlab.apps.status.models import Status
 
 @login_required
 def st_del_page(request, username, id):
